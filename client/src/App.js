@@ -1,10 +1,15 @@
 
 import './App.css';
-import Welcome from './components/Welcome';
+// import Welcome from './components/Welcome';
+import Footer from './components/Footer';
+import Login from './components/Login';
 function App() {
   return (
     <div className="App">
-<Welcome></Welcome>
+
+<Login/>
+
+<Footer/>
     </div>
   );
 }

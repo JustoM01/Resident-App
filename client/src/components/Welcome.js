@@ -1,6 +1,8 @@
 import React from 'react'
 import { useQuery } from '@apollo/client';
 import { Get_Users } from '../gql/queries';
+import Register from './Register';
+import Login from './Login';
 
 const Welcome = () => {
    
@@ -10,7 +12,11 @@ const Welcome = () => {
     }
 console.log(data)
   return (
-    <div>Welcome</div>
+   <div>
+    <Register></Register>
+    <Login></Login>
+   </div>
+  
   )
 }
 
