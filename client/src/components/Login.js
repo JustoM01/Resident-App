@@ -2,7 +2,6 @@ import React from 'react'
 import { useState } from 'react'
 
 import { useMutation } from '@apollo/client'
-// imported both mutations from my gql folder
 import { login_User } from '../gql/mutations'
 import { Get_Users } from '../gql/queries'
 
@@ -25,7 +24,7 @@ const Login = () => {
           // Handle successful login here
           console.log('User logged in');
     
-         
+     
         } catch (error) {
           // Handle login error here
           console.error('Login error:', error.message);

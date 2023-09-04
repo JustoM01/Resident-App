@@ -4,6 +4,7 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs')
 const { AuthenticationError } = require('apollo-server-express');
 const jwt = require('jsonwebtoken');
+
 const SECRET_KEY = 'csjaoikasdoidshnoidshoishdohbiuvcuyv'; 
 
 // naming and exporting my resolvers
@@ -13,6 +14,11 @@ const resolvers = {
             const user = await User.find({})
             return user
            },
+
+           getUser:async(parent,args) =>{
+            const singleUser = await User.findById(args.id)
+            return singleUser
+           }
     },
 
 
@@ -100,6 +106,20 @@ const resolvers = {
          
          const users = await User.findByIdAndDelete(args.id)
          return users
+        },
+
+
+        addComment : async(parent,{id,comment})=>{
+       return User.findOneAndUpdate(
+        { _id: id },
+        {
+          $addToSet: { comments: comment },
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
         }
 
 

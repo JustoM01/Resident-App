@@ -5,6 +5,7 @@ const typeDefs = gql`
   name: String
   email: String
   password:String
+  comments:[String!]
 }
  
 
@@ -15,14 +16,19 @@ type AuthPayload {
 
  type Query{
     getUsers:[User]
+    getUser(id:ID!):User
  }
 
+
+
+ 
 
 
 type Mutation{
     registerUser(name:String!, email:String!, password:String!):AuthPayload
     login(email: String!, password: String!): AuthPayload
      deleteUser( id:ID!):User
+     addComment(id:ID!, comment:String!):User
 }
 
 
