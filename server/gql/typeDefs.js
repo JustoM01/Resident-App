@@ -29,6 +29,7 @@ type Mutation{
     login(email: String!, password: String!): AuthPayload
      deleteUser( id:ID!):User
      addComment(id:ID!, comment:String!):User
+     deleteComment(id:ID!, comment:String!):User
 }
 
 

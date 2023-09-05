@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 
 
-
+import { AuthProvider } from './utils/Context';
 
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
@@ -16,9 +16,11 @@ const client = new ApolloClient({
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <AuthProvider>
 <ApolloProvider  client={client} >   
    <App />
 </ApolloProvider>
+</AuthProvider>
     
     
 

@@ -120,6 +120,16 @@ const resolvers = {
           runValidators: true,
         }
       );
+        },
+
+
+
+        deleteComment: async(parent, {id, comment}) =>{
+          return User.findByIdAndUpdate(
+            { _id: id },
+            { $pull: { comments: comment } },
+            { new: true }
+          )
         }
 
 

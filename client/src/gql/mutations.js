@@ -26,6 +26,7 @@ mutation login ($email: String!, $password: String!){
     user {
       email
       password
+      name
     }
   }
 }
