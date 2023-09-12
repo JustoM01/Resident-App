@@ -5,7 +5,7 @@ import { useState } from 'react'
 // imported both mutations from my gql folder
 import { register_User } from '../gql/mutations'
 import { Get_Users } from '../gql/queries'
-
+import {Form,  Row, Button} from 'react-bootstrap'
 
 
 const Register = () => {
@@ -42,31 +42,45 @@ const Register = () => {
   
 
   return (
-    <div>
-      <h2>Register</h2>
-      <form>
-        <input
+    <div >
+
+    
+      <h2 style={{textAlign:'center'}} >Register</h2>
+      <div className='Register-div'>
+      <Form>
+      <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
+        <Form.Control
+         
+        className='Register-input'
           type="text"
           placeholder="Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-        <input
+        <Form.Control
+        
+        className='Register-input'
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <input
+        <Form.Control
+        
+        className='Register-input'
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="button" onClick={handleRegister}>
-          Register
-        </button>
-      </form>
+
+          <Button type="button" variant='secondary' onClick={handleRegister}>
+            Register
+          </Button>
+        </Form.Group>
+        </Form>
+    </div>
+
     </div>
   )
 }

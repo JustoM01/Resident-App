@@ -1,6 +1,6 @@
 import React from 'react'
 import { useAuth } from '../utils/Context'
-import Profile from '../components/Profile';
+// import Profile from '../components/Profile';
 const Home = () => {
     const { user } = useAuth();
   return (
@@ -13,8 +13,6 @@ const Home = () => {
           {/* You can display other user information here */}
         </div>
       )}
-
-     <Profile/>
     
     </div>
   )

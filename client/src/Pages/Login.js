@@ -1,91 +1,82 @@
-import React from 'react'
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import { useMutation } from '@apollo/client'
-import { login_User } from '../gql/mutations'
-import { Get_Users } from '../gql/queries'
-import { useAuth } from '../utils/Context'
-
-
+import React from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+import { login_User } from '../gql/mutations';
+import { Get_Users } from '../gql/queries';
+import { useAuth } from '../utils/Context';
+import { Form, Button } from 'react-bootstrap';
 
 const Login = () => {
-  const { login,user } = useAuth(); // Access the login function from the context
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+  const { login, user } = useAuth();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-    const [loginUser] = useMutation(login_User,{
-        refetchQueries:[{query:Get_Users}]
-    })
+  const [loginUser] = useMutation(login_User, {
+    refetchQueries: [{ query: Get_Users }],
+  });
 
-    const naviagte = useNavigate()
+  const navigate = useNavigate();
 
-    const handleLogin = async () => {
-      try {
-        const { data } = await loginUser({
-          variables: { email, password },
-        });
-  
-        console.log('Data after login:', data);
-  
-        if (data && data.login) {
-          const loggedInUser = data.login.user; // Extract user data from the response
-          console.log('User logged in', loggedInUser);
-          login(loggedInUser); // Update the user context with the logged-in user
-          naviagte('/home');
-        } else {
-          console.error('Login failed');
-        }
-      } catch (error) {
-        console.error('Login error:', error.message);
+  const handleLogin = async () => {
+    try {
+      const { data } = await loginUser({
+        variables: { email, password },
+      });
+
+      console.log('Data after login:', data);
+
+      if (data && data.login) {
+        const loggedInUser = data.login.user;
+        console.log('User logged in', loggedInUser);
+        login(loggedInUser);
+        navigate('/home');
+        console.log(user)
+      } else {
+        console.error('Login failed');
       }
-      };
-
-  
+    } catch (error) {
+      console.error('Login error:', error.message);
+    }
+  };
 
   return (
-    <div>
-    <h2>Login</h2>
-    <form>
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button type="button" onClick={handleLogin}>
-        Login
-      </button>
-    </form>
+    <div className="black-background"> {/* Apply a black background */}
+      <div>
+      
 
-
-
-
-
-
-
-
-      {/* Display the current logged-in user */}
-      {user && (
         <div>
-          <h3>Logged-in User:</h3>
-          <p>Email: {user.email} {user.name}</p>
-          
-          {/* You can display other user information here */}
+          <Form>
+            <Form.Group controlId="formBasicEmail">
+              <Form.Control
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Form.Group>
+
+            <Form.Group controlId="formBasicPassword">
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </Form.Group>
+
+            <Button variant="secondary" type="button" onClick={handleLogin}
+            style={{marginTop:'3px'}}
+            >
+              Login
+            </Button>
+          </Form>
         </div>
-      )}
 
+      
+      </div>
+    </div>
+  );
+};
 
-
-
-
-  </div>
-  )
-}
-
-export default Login
+export default Login;
